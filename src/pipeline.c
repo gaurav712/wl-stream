@@ -196,6 +196,7 @@ Pipeline *pipeline_create(int w, int h, const char *monitor,
     char video[2048];
     snprintf(video, sizeof(video),
              "appsrc name=vsrc format=time is-live=true do-timestamp=true block=false "
+             "max-buffers=1 leaky-type=2 "
              "! videoconvert ! %s %s %s! %s "
              "! application/x-rtp,media=video,encoding-name=%s,payload=96 ! webrtc. ",
              enc, enc_params, parse, pay, enc_name);
